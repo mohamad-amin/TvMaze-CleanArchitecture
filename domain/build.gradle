@@ -5,21 +5,9 @@ sourceCompatibility = 1.7
 //noinspection GroovyUnusedAssignment
 targetCompatibility = 1.7
 
-configurations {
-    provided
-}
-
-sourceSets {
-    main {
-        compileClasspath += configurations.provided
-    }
-}
-
 dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
     def domainTestDependencies = rootProject.ext.domainTestDependencies
-
-    provided domainDependencies.javaxAnnotation
 
     compile domainDependencies.javaxInject
     compile domainDependencies.rxJava
