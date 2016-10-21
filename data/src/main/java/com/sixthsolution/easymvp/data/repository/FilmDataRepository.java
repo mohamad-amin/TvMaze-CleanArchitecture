@@ -7,6 +7,8 @@ import com.sixthsolution.easymvp.domain.repository.FilmRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
@@ -16,6 +18,7 @@ public class FilmDataRepository implements FilmRepository {
 
     private FilmApi filmApi;
 
+    @Inject
     public FilmDataRepository(FilmApi filmApi) {
         this.filmApi = filmApi;
     }

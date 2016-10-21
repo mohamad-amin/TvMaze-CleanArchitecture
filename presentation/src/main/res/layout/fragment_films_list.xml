@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fra">
+
+    <com.mohamadamin.tvmaze.view.self.custom.AutofitRecyclerView
+        android:id="@+id/films_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:recyclerviewEmptyView="@layout/empty_posts"/>
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:indeterminate="true"
+        android:id="@+id/progress_bar"
+        android:layout_gravity="center"
+        app:mpb_progressStyle="circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.NoPadding"/>
+
+    <include
+        android:id="@+id/films_list_error"
+        layout="@layout/network_error" />
+
+</FrameLayout>

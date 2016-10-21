@@ -7,12 +7,17 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath "com.fernandocejas.frodo:frodo-plugin:0.8.3"
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'com.sixthsolution.easymvp:easymvp-plugin:1.0.0-beta2'
     }
 }
 
 allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
     ext {
         androidApplicationId = 'com.sixthsolution.easymvp.tvmaze'
         androidVersionCode = 1

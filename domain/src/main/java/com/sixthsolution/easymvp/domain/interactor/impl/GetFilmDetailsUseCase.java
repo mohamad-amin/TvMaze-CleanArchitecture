@@ -15,10 +15,13 @@ public class GetFilmDetailsUseCase extends UseCase {
     private FilmRepository filmRepository;
     private String filmId;
 
-    protected GetFilmDetailsUseCase(ThreadExecutor threadExecutor, PostExecutionThread postThread,
-                                    FilmRepository filmRepository, String filmId) {
+    public GetFilmDetailsUseCase(ThreadExecutor threadExecutor, PostExecutionThread postThread,
+                                    FilmRepository filmRepository) {
         super(threadExecutor, postThread);
         this.filmRepository = filmRepository;
+    }
+
+    public void setFilmId(String filmId) {
         this.filmId = filmId;
     }
 

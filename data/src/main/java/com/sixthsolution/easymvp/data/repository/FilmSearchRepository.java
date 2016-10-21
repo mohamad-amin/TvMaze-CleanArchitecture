@@ -7,6 +7,8 @@ import com.sixthsolution.easymvp.domain.repository.SearchRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
@@ -16,6 +18,7 @@ public class FilmSearchRepository implements SearchRepository {
 
     private SearchApi searchApi;
 
+    @Inject
     public FilmSearchRepository(SearchApi searchApi) {
         this.searchApi = searchApi;
     }

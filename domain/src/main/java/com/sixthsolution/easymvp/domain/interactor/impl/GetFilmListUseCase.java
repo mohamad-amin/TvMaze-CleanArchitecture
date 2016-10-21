@@ -15,10 +15,13 @@ public class GetFilmListUseCase extends UseCase {
     private FilmRepository filmRepository;
     private int page;
 
-    protected GetFilmListUseCase(ThreadExecutor threadExecutor, PostExecutionThread postThread,
-                                 FilmRepository filmRepository, int page) {
+    public GetFilmListUseCase(ThreadExecutor threadExecutor,
+                              PostExecutionThread postThread, FilmRepository filmRepository) {
         super(threadExecutor, postThread);
         this.filmRepository = filmRepository;
+    }
+
+    private void setPage(int page) {
         this.page = page;
     }
 
