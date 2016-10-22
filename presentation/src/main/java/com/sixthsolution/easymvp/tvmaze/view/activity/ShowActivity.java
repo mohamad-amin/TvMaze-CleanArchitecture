@@ -80,6 +80,8 @@ public class ShowActivity extends BaseActivity implements FilmDetailView {
                 .activityModule(getActivityModule())
                 .build();
 
+        this.activityComponent.inject(this);
+
     }
 
     private void setupToolbar() {
