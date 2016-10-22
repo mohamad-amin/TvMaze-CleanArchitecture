@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-//apply plugin: 'com.sixthsolution.easymvp'
+apply plugin: 'easymvp'
 
 android {
 
@@ -47,12 +47,12 @@ android {
     }
 
     signingConfigs {
-        debug {
-            storeFile file('../buildsystem/debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
+//        debug {
+//            storeFile file('../buildsystem/debug.keystore')
+//            storePassword 'android'
+//            keyAlias 'androiddebugkey'
+//            keyPassword 'android'
+//        }
     }
 
     buildTypes {
@@ -81,11 +81,13 @@ dependencies {
     compile presentationDependencies.design
     compile presentationDependencies.ultimateRecyclerView
     compile presentationDependencies.materialProgressBar
+    compile presentationDependencies.timber
 
     apt presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
     provided presentationDependencies.javaxAnnotation
     compile presentationDependencies.butterKnife
+    apt presentationDependencies.butterKnifeCompiler
     compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid
 

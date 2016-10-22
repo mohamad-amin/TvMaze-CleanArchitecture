@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import easymvp.AbstractPresenter;
 import rx.Subscriber;
+import timber.log.Timber;
 
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 10/20/16.
@@ -26,10 +27,12 @@ public class FilmsListPresenter extends AbstractPresenter<FilmsListView> {
     }
 
     private void loadFilms() {
+        Timber.i("Going to load films");
         getFilmsListUseCase.execute(new FilmsListSubscriber());
     }
 
     public void reload() {
+        Timber.i("Reload called");
         getView().showProgressBar();
         loadFilms();
     }
@@ -38,6 +41,7 @@ public class FilmsListPresenter extends AbstractPresenter<FilmsListView> {
     public void onViewAttached(FilmsListView view) {
         super.onViewAttached(view);
         reload();
+        Timber.i("OnViewAttached");
     }
 
     @Override
@@ -58,15 +62,19 @@ public class FilmsListPresenter extends AbstractPresenter<FilmsListView> {
     private final class FilmsListSubscriber extends Subscriber<List<Film>> {
 
         @Override
-        public void onCompleted() {}
+        public void onCompleted() {
+            Timber.i("UseCase execution completed");
+        }
 
         @Override
         public void onError(Throwable e) {
+            Timber.d(e);
             getView().showErrorView();
         }
 
         @Override
         public void onNext(List<Film> films) {
+            Timber.i("Films List Downloaded ^_^");
             getView().showFilms(films);
         }
 

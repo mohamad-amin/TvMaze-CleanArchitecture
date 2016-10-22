@@ -1,7 +1,6 @@
 package com.sixthsolution.easymvp.tvmaze.internal.di.module;
 
 import com.sixthsolution.easymvp.domain.executor.PostExecutionThread;
-import com.sixthsolution.easymvp.domain.executor.ThreadExecutor;
 import com.sixthsolution.easymvp.domain.interactor.base.UseCase;
 import com.sixthsolution.easymvp.domain.interactor.impl.ConvertFilmToJsonUseCase;
 import com.sixthsolution.easymvp.domain.interactor.impl.GetFilmDetailsUseCase;
@@ -13,6 +12,7 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import rx.Scheduler;
 
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 10/21/16.
@@ -21,42 +21,42 @@ import dagger.Provides;
 public class UseCaseModule {
 
     @Provides
-    ConvertFilmToJsonUseCase provideConvertFilmToJsonUseCase(ThreadExecutor threadExecutor,
-                                                    PostExecutionThread postExecutionThread) {
-        return new ConvertFilmToJsonUseCase(threadExecutor, postExecutionThread);
+    ConvertFilmToJsonUseCase provideConvertFilmToJsonUseCase(Scheduler scheduler,
+                                                             PostExecutionThread postExecutionThread) {
+        return new ConvertFilmToJsonUseCase(scheduler, postExecutionThread);
     }
 
     @Named(Constants.CONVERT_FILM_TO_JSON)
     @Provides
-    UseCase provideConvertFilmToJsonUseCaseRaw(ThreadExecutor threadExecutor,
+    UseCase provideConvertFilmToJsonUseCaseRaw(Scheduler scheduler,
                                                     PostExecutionThread postExecutionThread) {
-        return provideConvertFilmToJsonUseCase(threadExecutor, postExecutionThread);
+        return provideConvertFilmToJsonUseCase(scheduler, postExecutionThread);
     }
 
     @Provides
-    GetFilmListUseCase provideGetFilmListUseCase(ThreadExecutor threadExecutor,
+    GetFilmListUseCase provideGetFilmListUseCase(Scheduler scheduler,
                             PostExecutionThread postExecutionThread, FilmRepository repository) {
-        return new GetFilmListUseCase(threadExecutor, postExecutionThread, repository);
+        return new GetFilmListUseCase(scheduler, postExecutionThread, repository);
     }
 
     @Named(Constants.FILMS_LIST)
     @Provides
-    UseCase provideGetFilmListUseCaseRaw(ThreadExecutor threadExecutor,
+    UseCase provideGetFilmListUseCaseRaw(Scheduler scheduler,
                             PostExecutionThread postExecutionThread, FilmRepository repository) {
-        return provideGetFilmListUseCase(threadExecutor, postExecutionThread, repository);
+        return provideGetFilmListUseCase(scheduler, postExecutionThread, repository);
     }
 
     @Provides
-    GetFilmDetailsUseCase provideGetFilmDetailsUseCase(ThreadExecutor threadExecutor,
+    GetFilmDetailsUseCase provideGetFilmDetailsUseCase(Scheduler scheduler,
                               PostExecutionThread postExecutionThread, FilmRepository repository) {
-        return new GetFilmDetailsUseCase(threadExecutor, postExecutionThread, repository);
+        return new GetFilmDetailsUseCase(scheduler, postExecutionThread, repository);
     }
 
     @Named(Constants.FILM_DETAIL)
     @Provides
-    UseCase provideGetFilmDetailUseCaseRaw(ThreadExecutor threadExecutor,
+    UseCase provideGetFilmDetailUseCaseRaw(Scheduler scheduler,
                               PostExecutionThread postExecutionThread, FilmRepository repository) {
-        return provideGetFilmDetailsUseCase(threadExecutor, postExecutionThread, repository);
+        return provideGetFilmDetailsUseCase(scheduler, postExecutionThread, repository);
     }
 
 

@@ -13,8 +13,6 @@ import com.sixthsolution.easymvp.tvmaze.R;
 import com.sixthsolution.easymvp.tvmaze.internal.di.HasComponent;
 import com.sixthsolution.easymvp.tvmaze.internal.di.component.ActivityComponent;
 import com.sixthsolution.easymvp.tvmaze.internal.di.component.DaggerActivityComponent;
-import com.sixthsolution.easymvp.tvmaze.internal.di.component.DaggerDataComponent;
-import com.sixthsolution.easymvp.tvmaze.internal.di.component.DataComponent;
 import com.sixthsolution.easymvp.tvmaze.view.base.BaseActivity;
 import com.sixthsolution.easymvp.tvmaze.view.fragment.FilmsListFragment;
 
@@ -49,12 +47,8 @@ public class FilmsListActivity extends BaseActivity implements
 
     private void initializeInjector() {
 
-        DataComponent dataComponent = DaggerDataComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .build();
-
         this.activityComponent = DaggerActivityComponent.builder()
-                .dataComponent(dataComponent)
+                .dataComponent(getDataComponent())
                 .activityModule(getActivityModule())
                 .build();
 
@@ -136,4 +130,5 @@ public class FilmsListActivity extends BaseActivity implements
     public ActivityComponent getComponent() {
         return activityComponent;
     }
+
 }

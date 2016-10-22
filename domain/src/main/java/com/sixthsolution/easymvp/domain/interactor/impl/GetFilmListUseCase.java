@@ -1,11 +1,11 @@
 package com.sixthsolution.easymvp.domain.interactor.impl;
 
 import com.sixthsolution.easymvp.domain.executor.PostExecutionThread;
-import com.sixthsolution.easymvp.domain.executor.ThreadExecutor;
 import com.sixthsolution.easymvp.domain.interactor.base.UseCase;
 import com.sixthsolution.easymvp.domain.repository.FilmRepository;
 
 import rx.Observable;
+import rx.Scheduler;
 
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 10/17/16.
@@ -15,9 +15,9 @@ public class GetFilmListUseCase extends UseCase {
     private FilmRepository filmRepository;
     private int page;
 
-    public GetFilmListUseCase(ThreadExecutor threadExecutor,
+    public GetFilmListUseCase(Scheduler scheduler,
                               PostExecutionThread postThread, FilmRepository filmRepository) {
-        super(threadExecutor, postThread);
+        super(scheduler, postThread);
         this.filmRepository = filmRepository;
     }
 

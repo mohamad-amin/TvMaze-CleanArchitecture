@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sixthsolution.easymvp.domain.entity.Film;
 import com.sixthsolution.easymvp.tvmaze.R;
+import com.sixthsolution.easymvp.tvmaze.internal.di.component.ActivityComponent;
+import com.sixthsolution.easymvp.tvmaze.internal.di.component.DaggerActivityComponent;
 import com.sixthsolution.easymvp.tvmaze.model.Constants;
 import com.sixthsolution.easymvp.tvmaze.presenter.FilmDetailPresenter;
 import com.sixthsolution.easymvp.tvmaze.view.base.BaseActivity;
@@ -35,6 +37,8 @@ public class ShowActivity extends BaseActivity implements FilmDetailView {
     @Inject
     @Presenter
     FilmDetailPresenter presenter;
+
+    private ActivityComponent activityComponent;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.header_tabs) TabLayout tabLayout;
@@ -60,11 +64,21 @@ public class ShowActivity extends BaseActivity implements FilmDetailView {
                     .skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .fitCenter()
-//                    .centerCrop()
                     .into(headerImage);
 
         }
         setupToolbar();
+
+        initializeInjector();
+
+    }
+
+    private void initializeInjector() {
+
+        this.activityComponent = DaggerActivityComponent.builder()
+                .dataComponent(getDataComponent())
+                .activityModule(getActivityModule())
+                .build();
 
     }
 

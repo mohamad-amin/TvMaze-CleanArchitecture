@@ -32,6 +32,7 @@ ext {
     retrofitVersion = '2.1.0'
     ultimateRecyclerViewVersion = '0.7.0'
     materialProgressBarVersion = '1.1.7'
+    timberVersion = '4.3.1'
 
     //Testing
     robolectricVersion = '3.0'
@@ -54,10 +55,12 @@ ext {
             easymvpApi:             "com.sixthsolution.easymvp:easymvp-api:${easymvpVersion}",
             easymvpCompiler:        "com.sixthsolution.easymvp:easymvp-compiler:${easymvpVersion}",
             easymvpWeaver:          "com.sixthsolution.easymvp:easymvp-weaver:${easymvpVersion}",
+            timber:                 "com.jakewharton.timber:timber:${timberVersion}",
 // Todo: EasyMVP Rx Api
             daggerCompiler:         "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger:                 "com.google.dagger:dagger:${daggerVersion}",
             butterKnife:            "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeCompiler:    "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             rxJava:                 "io.reactivex:rxjava:${rxJavaVersion}",
             rxAndroid:              "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:        "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -72,6 +75,7 @@ ext {
     ]
 
     domainDependencies = [
+            timber:             "com.jakewharton.timber:timber:${timberVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
@@ -84,6 +88,7 @@ ext {
     ]
 
     dataDependencies = [
+            timber:             "com.jakewharton.timber:timber:${timberVersion}",
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",

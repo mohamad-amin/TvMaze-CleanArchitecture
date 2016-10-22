@@ -1,12 +1,11 @@
 package com.sixthsolution.easymvp.domain.interactor.base;
 
 import com.sixthsolution.easymvp.domain.executor.PostExecutionThread;
-import com.sixthsolution.easymvp.domain.executor.ThreadExecutor;
 
 import rx.Observable;
+import rx.Scheduler;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 /**
@@ -14,12 +13,12 @@ import rx.subscriptions.Subscriptions;
  */
 public abstract class UseCase {
 
-    private final ThreadExecutor threadExecutor;
+    private final Scheduler scheduler;
     private final PostExecutionThread postExecutionThread;
     private Subscription subscription = Subscriptions.empty();
 
-    protected UseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
-        this.threadExecutor = threadExecutor;
+    protected UseCase(Scheduler scheduler, PostExecutionThread postExecutionThread) {
+        this.scheduler = scheduler;
         this.postExecutionThread = postExecutionThread;
     }
 
@@ -28,7 +27,7 @@ public abstract class UseCase {
     @SuppressWarnings("unchecked")
     public void execute(Subscriber useCaseSubscriber) {
         this.subscription = getTask()
-                .subscribeOn(Schedulers.from(threadExecutor))
+                .subscribeOn(scheduler)
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(useCaseSubscriber);
     }

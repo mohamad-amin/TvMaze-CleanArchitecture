@@ -3,10 +3,10 @@ package com.sixthsolution.easymvp.domain.interactor.impl;
 import com.google.gson.Gson;
 import com.sixthsolution.easymvp.domain.entity.Film;
 import com.sixthsolution.easymvp.domain.executor.PostExecutionThread;
-import com.sixthsolution.easymvp.domain.executor.ThreadExecutor;
 import com.sixthsolution.easymvp.domain.interactor.base.UseCase;
 
 import rx.Observable;
+import rx.Scheduler;
 import rx.functions.Func0;
 
 /**
@@ -17,8 +17,8 @@ public class ConvertFilmToJsonUseCase extends UseCase {
     private Film film;
     private Gson gson;
 
-    public ConvertFilmToJsonUseCase(ThreadExecutor threadExecutor, PostExecutionThread postThread) {
-        super(threadExecutor, postThread);
+    public ConvertFilmToJsonUseCase(Scheduler scheduler, PostExecutionThread postThread) {
+        super(scheduler, postThread);
     }
 
     public void setFilm(Film film) {

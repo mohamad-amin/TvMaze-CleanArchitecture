@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.sixthsolution.easymvp.tvmaze.app.AppController;
 import com.sixthsolution.easymvp.tvmaze.internal.di.component.ApplicationComponent;
+import com.sixthsolution.easymvp.tvmaze.internal.di.component.DataComponent;
 import com.sixthsolution.easymvp.tvmaze.internal.di.module.ActivityModule;
 
 /**
@@ -32,8 +33,16 @@ public class BaseActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    protected AppController getAppController() {
+        return (AppController) getApplication();
+    }
+
+    protected DataComponent getDataComponent() {
+        return getAppController().getDataComponent();
+    }
+
     protected ApplicationComponent getApplicationComponent() {
-        return ((AppController) getApplication()).getApplicationComponent();
+        return getAppController().getApplicationComponent();
     }
 
     protected ActivityModule getActivityModule() {

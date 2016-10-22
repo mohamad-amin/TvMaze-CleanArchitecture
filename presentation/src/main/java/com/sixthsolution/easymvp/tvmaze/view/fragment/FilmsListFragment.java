@@ -1,6 +1,7 @@
 package com.sixthsolution.easymvp.tvmaze.view.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,10 @@ public class FilmsListFragment extends BaseFragment implements FilmsListView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent(ActivityComponent.class).inject(this);
+        ActivityComponent component = getComponent(ActivityComponent.class);
+        if (savedInstanceState == null && component != null) {
+            component.inject(this);
+        }
     }
 
     @Override
@@ -62,6 +66,11 @@ public class FilmsListFragment extends BaseFragment implements FilmsListView {
         View view = inflater.inflate(R.layout.fragment_films_list, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
