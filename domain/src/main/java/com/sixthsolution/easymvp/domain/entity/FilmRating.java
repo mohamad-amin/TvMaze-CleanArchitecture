@@ -1,11 +1,20 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class FilmRating {
 
-    private double average;
+    double average;
+
+    @ParcelConstructor
+    public FilmRating(double average) {
+        this.average = average;
+    }
 
     public double getAverage() {
         return average;

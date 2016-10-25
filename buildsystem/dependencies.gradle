@@ -20,7 +20,7 @@ ext {
     design = '25.0.0'
 
     //Libraries
-    easymvpVersion = '1.0.0-beta2'
+    easymvpVersion = '1.0.0-beta3'
     daggerVersion = '2.6.1'
     butterKnifeVersion = '8.4.0'
     rxJavaVersion = '1.1.6'
@@ -33,6 +33,7 @@ ext {
     ultimateRecyclerViewVersion = '0.7.0'
     materialProgressBarVersion = '1.1.7'
     timberVersion = '4.3.1'
+    parcelerVersion = '1.1.6'
 
     //Testing
     robolectricVersion = '3.0'
@@ -47,6 +48,8 @@ ext {
     leakCanaryVersion = '1.3.1'
 
     presentationDependencies = [
+            parcelerApi:            "org.parceler:parceler-api:${parcelerVersion}",
+            parcelerCompiler:       "org.parceler:parceler:${parcelerVersion}",
             materialProgressBar:    "me.zhanghai.android.materialprogressbar:library:${materialProgressBarVersion}",
             appcompat:              "com.android.support:appcompat-v7:${appcompat}",
             cardview:               "com.android.support:cardview-v7:${cardview}",
@@ -75,6 +78,8 @@ ext {
     ]
 
     domainDependencies = [
+            easymvpRxApi:       "com.sixthsolution.easymvp:easymvp-rx-api:${easymvpVersion}",
+            parcelerApi:        "org.parceler:parceler-api:${parcelerVersion}",
             timber:             "com.jakewharton.timber:timber:${timberVersion}",
             gson:               "com.google.code.gson:gson:${gsonVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",

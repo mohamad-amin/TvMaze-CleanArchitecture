@@ -1,13 +1,11 @@
 package com.sixthsolution.easymvp.data.network;
 
-import com.sixthsolution.easymvp.domain.entity.Episode;
 import com.sixthsolution.easymvp.domain.entity.Film;
 import com.sixthsolution.easymvp.domain.entity.People;
 
 import java.util.List;
 
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 

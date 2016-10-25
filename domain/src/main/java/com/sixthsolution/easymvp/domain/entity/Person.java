@@ -1,13 +1,24 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 10/18/16.
  */
+@Parcel
 public class Person {
 
-    private int id;
-    private String name;
-    private FilmImageUrl image;
+    int id;
+    String name;
+    FilmImageUrl image;
+
+    @ParcelConstructor
+    public Person(int id, String name, FilmImageUrl image) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+    }
 
     public int getId() {
         return id;

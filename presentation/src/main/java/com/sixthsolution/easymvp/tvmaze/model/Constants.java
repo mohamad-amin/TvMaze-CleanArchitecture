@@ -7,7 +7,6 @@ public class Constants {
 
     public static final String FILMS_LIST = "FilmsList",
             FILM_DETAIL = "FilmDetails",
-            CONVERT_FILM_TO_JSON = "ConvertFilmToJson",
             EXTRA_FILM = "ExtraFilm",
             IMAGE_URL = "ImageUrl",
             TV_MAZE_URL_SELF = "http://api.tvmaze.com/",

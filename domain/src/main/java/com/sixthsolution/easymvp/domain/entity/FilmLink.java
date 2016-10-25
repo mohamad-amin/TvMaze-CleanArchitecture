@@ -1,11 +1,22 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class FilmLink {
 
-    private FilmUrl self, previousEpisode;
+    FilmUrl self, previousEpisode;
+
+    @ParcelConstructor
+    public FilmLink(FilmUrl self, FilmUrl previousEpisode) {
+        this.self = self;
+        this.previousEpisode = previousEpisode;
+    }
 
     public FilmUrl getSelf() {
         return self;

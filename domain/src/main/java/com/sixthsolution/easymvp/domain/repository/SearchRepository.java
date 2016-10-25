@@ -1,7 +1,6 @@
 package com.sixthsolution.easymvp.domain.repository;
 
 
-import com.sixthsolution.easymvp.domain.entity.Episode;
 import com.sixthsolution.easymvp.domain.entity.Film;
 import com.sixthsolution.easymvp.domain.entity.People;
 

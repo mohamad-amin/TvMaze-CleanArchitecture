@@ -1,34 +1,42 @@
 package com.sixthsolution.easymvp.tvmaze.presenter;
 
 import com.sixthsolution.easymvp.domain.entity.Film;
-import com.sixthsolution.easymvp.domain.interactor.base.UseCase;
-import com.sixthsolution.easymvp.tvmaze.model.Constants;
+import com.sixthsolution.easymvp.domain.interactor.GetFilmsListUseCase;
 import com.sixthsolution.easymvp.tvmaze.view.base.FilmsListView;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import easymvp.AbstractPresenter;
+import easymvp.RxPresenter;
+import easymvp.boundary.RxUseCase;
 import rx.Subscriber;
+import rx.Subscription;
 import timber.log.Timber;
 
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 10/20/16.
  */
-public class FilmsListPresenter extends AbstractPresenter<FilmsListView> {
+public class FilmsListPresenter extends RxPresenter<FilmsListView> {
 
-    UseCase getFilmsListUseCase;
+    private GetFilmsListUseCase getFilmsListUseCase;
+    private List<Film> data = Collections.emptyList();
 
     @Inject
-    public FilmsListPresenter(@Named(Constants.FILMS_LIST) UseCase getFilmsListUseCase) {
+    public FilmsListPresenter(GetFilmsListUseCase getFilmsListUseCase) {
         this.getFilmsListUseCase = getFilmsListUseCase;
     }
 
     private void loadFilms() {
         Timber.i("Going to load films");
-        getFilmsListUseCase.execute(new FilmsListSubscriber());
+        Subscription subscription = RxUseCase.with(getFilmsListUseCase)
+                .execute(0)
+                .noMapper()
+//                .observeOn(getFilmsListUseCase.getUseCaseExecutor())
+//                .subscribeOn(getFilmsListUseCase.getPostExecutionThread())
+                .subscribe(new FilmsListSubscriber());
+        addSubscription(subscription);
     }
 
     public void reload() {
@@ -40,7 +48,10 @@ public class FilmsListPresenter extends AbstractPresenter<FilmsListView> {
     @Override
     public void onViewAttached(FilmsListView view) {
         super.onViewAttached(view);
-        reload();
+        // Todo: Create a data store
+        if (data.size() == 0) {
+            reload();
+        }
         Timber.i("OnViewAttached");
     }
 
@@ -74,6 +85,7 @@ public class FilmsListPresenter extends AbstractPresenter<FilmsListView> {
 
         @Override
         public void onNext(List<Film> films) {
+            FilmsListPresenter.this.data = films;
             Timber.i("Films List Downloaded ^_^");
             getView().showFilms(films);
         }

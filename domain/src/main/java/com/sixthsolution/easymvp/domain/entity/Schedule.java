@@ -1,14 +1,24 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 import java.util.List;
 
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class Schedule {
 
-    private String time;
-    private List<String> days;
+    String time;
+    List<String> days;
+
+    @ParcelConstructor
+    public Schedule(String time, List<String> days) {
+        this.time = time;
+        this.days = days;
+    }
 
     public List<String> getDays() {
         return days;

@@ -14,7 +14,9 @@ import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 import com.sixthsolution.easymvp.domain.entity.Film;
 import com.sixthsolution.easymvp.tvmaze.R;
 import com.sixthsolution.easymvp.tvmaze.model.Constants;
-import com.sixthsolution.easymvp.tvmaze.view.activity.ShowActivity;
+import com.sixthsolution.easymvp.tvmaze.view.activity.FilmDetailActivity;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,16 +24,15 @@ import butterknife.ButterKnife;
 /**
  * Created by mohamadamin on 9/1/16.
  */
-public class IconicFilmViewHolder extends UltimateRecyclerviewViewHolder<Film> {
+public class FilmListViewHolder extends UltimateRecyclerviewViewHolder<Film> {
 
     @BindView(R.id.header_image) ImageView imageView;
     @BindView(R.id.item_title) TextView titleText;
 
-    private String filmJson;
-    private String imageUrl;
+    private Film film;
     private Activity activity;
 
-    public IconicFilmViewHolder(View view, Activity activity) {
+    public FilmListViewHolder(View view, Activity activity) {
         super(view);
         this.activity = activity;
         ButterKnife.bind(this, view);
@@ -39,9 +40,10 @@ public class IconicFilmViewHolder extends UltimateRecyclerviewViewHolder<Film> {
     }
 
     private void launchIntent() {
-        Intent intent = new Intent(activity, ShowActivity.class);
-        intent.putExtra(Constants.IMAGE_URL, imageUrl);
-        intent.putExtra(Constants.EXTRA_FILM, filmJson);
+
+        Intent intent = new Intent(activity, FilmDetailActivity.class);
+        intent.putExtra(Constants.EXTRA_FILM, Parcels.wrap(film));
+        intent.putExtra(Constants.IMAGE_URL, film.getImage().getOriginal());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptionsCompat options =
@@ -51,14 +53,16 @@ public class IconicFilmViewHolder extends UltimateRecyclerviewViewHolder<Film> {
         } else {
             activity.startActivity(intent);
         }
+
     }
 
-    public void setFilmJson(String filmJson) {
-        this.filmJson = filmJson;
+    public void bindFilm(Film film) {
+        this.film = film;
+        showIcon(film.getImage().getOriginal());
+        showTitle(film.getName());
     }
 
-    public void showIcon(String url) {
-        this.imageUrl = url;
+    private void showIcon(String url) {
         Glide.with(getContext().getApplicationContext())
                 .load(url)
                 .skipMemoryCache(true)
@@ -68,7 +72,7 @@ public class IconicFilmViewHolder extends UltimateRecyclerviewViewHolder<Film> {
                 .into(imageView);
     }
 
-    public void showTitle(String title) {
+    private void showTitle(String title) {
         titleText.setText(title);
     }
 

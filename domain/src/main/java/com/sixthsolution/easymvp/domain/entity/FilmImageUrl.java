@@ -1,12 +1,22 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class FilmImageUrl {
 
-    private String medium;
-    private String original;
+    String medium;
+    String original;
+
+    @ParcelConstructor
+    public FilmImageUrl(String medium, String original) {
+        this.medium = medium;
+        this.original = original;
+    }
 
     public String getMedium() {
         return medium;
@@ -23,4 +33,5 @@ public class FilmImageUrl {
     public void setOriginal(String original) {
         this.original = original;
     }
+
 }

@@ -2,12 +2,14 @@ package com.sixthsolution.easymvp.tvmaze.internal.di.module;
 
 import android.content.Context;
 
-import com.sixthsolution.easymvp.domain.executor.PostExecutionThread;
+import com.sixthsolution.easymvp.data.executor.IoExecutor;
 import com.sixthsolution.easymvp.tvmaze.app.AppController;
 import com.sixthsolution.easymvp.tvmaze.executor.UiThread;
 
 import dagger.Module;
 import dagger.Provides;
+import easymvp.executer.PostExecutionThread;
+import easymvp.executer.UseCaseExecutor;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
@@ -36,6 +38,11 @@ public class ApplicationModule {
     @Provides
     PostExecutionThread providePostExecutionThread(UiThread uiThread) {
         return uiThread;
+    }
+
+    @Provides
+    UseCaseExecutor provideUseCaseExecutor(IoExecutor ioExecutor) {
+        return ioExecutor;
     }
 
 }

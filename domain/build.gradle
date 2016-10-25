@@ -9,6 +9,9 @@ dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
     def domainTestDependencies = rootProject.ext.domainTestDependencies
 
+    compile domainDependencies.parcelerApi
+    compile domainDependencies.easymvpRxApi
+
     compile domainDependencies.gson
     compile domainDependencies.javaxInject
     compile domainDependencies.rxJava

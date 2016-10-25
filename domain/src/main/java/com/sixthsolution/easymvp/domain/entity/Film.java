@@ -1,21 +1,50 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 import java.util.List;
 
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class Film {
 
-    private long updated;
-    private FilmLink links;
-    private Producer network;
-    private Schedule schedule;
-    private FilmRating rating;
-    private FilmImageUrl image;
-    private List<String> genres;
-    private int id, runtime, weight;
-    private String url, name, type, language, status, premiered, webChannel, summary;
+    long updated;
+    FilmLink links;
+    Producer network;
+    Schedule schedule;
+    FilmRating rating;
+    FilmImageUrl image;
+    List<String> genres;
+    int id, runtime, weight;
+    String url, name, type, language, status, premiered, webChannel, summary;
+
+    @ParcelConstructor
+    public Film(long updated, FilmLink links, Producer network, Schedule schedule,
+                FilmRating rating, FilmImageUrl image, List<String> genres, int id,
+                int runtime, int weight, String url, String name, String type, String language,
+                String status, String premiered, String webChannel, String summary) {
+        this.updated = updated;
+        this.links = links;
+        this.network = network;
+        this.schedule = schedule;
+        this.rating = rating;
+        this.image = image;
+        this.genres = genres;
+        this.id = id;
+        this.runtime = runtime;
+        this.weight = weight;
+        this.url = url;
+        this.name = name;
+        this.type = type;
+        this.language = language;
+        this.status = status;
+        this.premiered = premiered;
+        this.webChannel = webChannel;
+        this.summary = summary;
+    }
 
     public FilmLink getLinks() {
         return links;

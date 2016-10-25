@@ -1,13 +1,24 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class Producer {
 
-    private int id;
-    private String name;
-    private Country country;
+    int id;
+    String name;
+    Country country;
+
+    @ParcelConstructor
+    public Producer(int id, String name, Country country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+    }
 
     public int getId() {
         return id;

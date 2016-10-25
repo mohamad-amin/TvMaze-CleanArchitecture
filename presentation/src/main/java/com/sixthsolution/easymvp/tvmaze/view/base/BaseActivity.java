@@ -13,12 +13,13 @@ import com.sixthsolution.easymvp.tvmaze.internal.di.module.ActivityModule;
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 10/19/16.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getApplicationComponent().inject(this);
+        injectDependencies(getDataComponent());
     }
 
     /**
@@ -32,6 +33,8 @@ public class BaseActivity extends AppCompatActivity {
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
     }
+
+    protected abstract void injectDependencies(DataComponent dataComponent);
 
     protected AppController getAppController() {
         return (AppController) getApplication();

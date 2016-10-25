@@ -13,11 +13,13 @@ import com.sixthsolution.easymvp.tvmaze.R;
 import com.sixthsolution.easymvp.tvmaze.internal.di.HasComponent;
 import com.sixthsolution.easymvp.tvmaze.internal.di.component.ActivityComponent;
 import com.sixthsolution.easymvp.tvmaze.internal.di.component.DaggerActivityComponent;
+import com.sixthsolution.easymvp.tvmaze.internal.di.component.DataComponent;
 import com.sixthsolution.easymvp.tvmaze.view.base.BaseActivity;
 import com.sixthsolution.easymvp.tvmaze.view.fragment.FilmsListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class FilmsListActivity extends BaseActivity implements
         HasComponent<ActivityComponent>,
@@ -33,19 +35,20 @@ public class FilmsListActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_film_list);
 
         ButterKnife.bind(this);
-        initializeInjector();
         setupToolbar();
 
         if (savedInstanceState == null) {
             launchHome();
+            Timber.i("Launching home fragment.");
         }
 
     }
 
-    private void initializeInjector() {
+    @Override
+    protected void injectDependencies(DataComponent dataComponent) {
 
         this.activityComponent = DaggerActivityComponent.builder()
                 .dataComponent(getDataComponent())

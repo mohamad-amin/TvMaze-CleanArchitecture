@@ -1,9 +1,8 @@
 package com.sixthsolution.easymvp.tvmaze.executor;
 
-import com.sixthsolution.easymvp.domain.executor.PostExecutionThread;
-
 import javax.inject.Inject;
 
+import easymvp.executer.PostExecutionThread;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 

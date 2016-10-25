@@ -1,13 +1,24 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  *   * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 8/27/16.
  */
+@Parcel
 public class Country {
 
-    private String name;
-    private String code;
-    private String timezone;
+    String name;
+    String code;
+    String timezone;
+
+    @ParcelConstructor
+    public Country(String name, String code, String timezone) {
+        this.name = name;
+        this.code = code;
+        this.timezone = timezone;
+    }
 
     public String getName() {
         return name;
@@ -32,4 +43,5 @@ public class Country {
     public void setTimezone(String timezone) {
         this.timezone = timezone;
     }
+
 }

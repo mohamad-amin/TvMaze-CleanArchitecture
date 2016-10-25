@@ -1,13 +1,34 @@
 package com.sixthsolution.easymvp.domain.entity;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 /**
  * @author MohamadAmin Mohamadi (mohammadi.mohamadamin@gmail.com) on 9/6/16.
  */
+@Parcel
 public class Season {
 
-    private int id, season, number, runtime;
-    private String url, name, airdate, airtime, airstamp, summary;
-    private FilmImageUrl image;
+    int id, season, number, runtime;
+    String url, name, airdate, airtime, airstamp, summary;
+    FilmImageUrl image;
+
+    @ParcelConstructor
+    public Season(int id, int season, int number, int runtime, String url,
+                  String name, String airdate,
+                  String airtime, String airstamp, String summary, FilmImageUrl image) {
+        this.id = id;
+        this.season = season;
+        this.number = number;
+        this.runtime = runtime;
+        this.url = url;
+        this.name = name;
+        this.airdate = airdate;
+        this.airtime = airtime;
+        this.airstamp = airstamp;
+        this.summary = summary;
+        this.image = image;
+    }
 
     public int getId() {
         return id;

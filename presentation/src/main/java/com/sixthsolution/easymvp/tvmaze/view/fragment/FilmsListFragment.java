@@ -1,5 +1,6 @@
 package com.sixthsolution.easymvp.tvmaze.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,7 +13,8 @@ import com.sixthsolution.easymvp.domain.entity.Film;
 import com.sixthsolution.easymvp.tvmaze.R;
 import com.sixthsolution.easymvp.tvmaze.internal.di.component.ActivityComponent;
 import com.sixthsolution.easymvp.tvmaze.presenter.FilmsListPresenter;
-import com.sixthsolution.easymvp.tvmaze.view.adapter.IconicFilmAdapter;
+import com.sixthsolution.easymvp.tvmaze.view.adapter.FilmListAdapter;
+import com.sixthsolution.easymvp.tvmaze.view.base.BaseActivity;
 import com.sixthsolution.easymvp.tvmaze.view.base.BaseFragment;
 import com.sixthsolution.easymvp.tvmaze.view.base.FilmsListView;
 
@@ -38,8 +40,7 @@ public class FilmsListFragment extends BaseFragment implements FilmsListView {
     @Presenter
     FilmsListPresenter presenter;
 
-    @Inject
-    IconicFilmAdapter adapter;
+    FilmListAdapter adapter;
 
     @OnClick(R.id.network_error_button)
     public void onClick() {
@@ -75,9 +76,18 @@ public class FilmsListFragment extends BaseFragment implements FilmsListView {
 
     @Override
     public void showFilms(List<Film> films) {
-        adapter.setFilms(films);
+        adapter = new FilmListAdapter(getBaseActivity());
         recyclerView.setAdapter(adapter);
+        adapter.setFilms(films);
         showRecyclerView();
+    }
+
+    @Override
+    public Intent getComingIntent() {
+        if (getActivity() == null) {
+            return null;
+        }
+        return getActivity().getIntent();
     }
 
     @Override
@@ -105,5 +115,8 @@ public class FilmsListFragment extends BaseFragment implements FilmsListView {
         networkErrorView.setVisibility(View.GONE);
     }
 
+    private BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
 
 }

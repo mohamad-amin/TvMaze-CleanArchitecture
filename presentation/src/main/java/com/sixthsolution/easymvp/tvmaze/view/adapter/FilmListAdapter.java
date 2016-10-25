@@ -7,31 +7,23 @@ import android.view.ViewGroup;
 
 import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
 import com.sixthsolution.easymvp.domain.entity.Film;
-import com.sixthsolution.easymvp.domain.interactor.impl.ConvertFilmToJsonUseCase;
 import com.sixthsolution.easymvp.tvmaze.R;
 import com.sixthsolution.easymvp.tvmaze.view.base.BaseActivity;
-import com.sixthsolution.easymvp.tvmaze.view.viewholder.IconicFilmViewHolder;
+import com.sixthsolution.easymvp.tvmaze.view.viewholder.FilmListViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import rx.Subscriber;
-
 /**
  * Created by mohamadamin on 9/1/16.
  */
-public class IconicFilmAdapter extends UltimateViewAdapter<IconicFilmViewHolder> {
+public class FilmListAdapter extends UltimateViewAdapter<FilmListViewHolder> {
 
     private List<Film> films;
     private BaseActivity activity;
-    private ConvertFilmToJsonUseCase convertFilmToUseCase;
 
-    @Inject
-    public IconicFilmAdapter(BaseActivity activity, ConvertFilmToJsonUseCase useCase) {
+    public FilmListAdapter(BaseActivity activity) {
         this.activity = activity;
-        this.convertFilmToUseCase = useCase;
         this.films = Collections.emptyList();
     }
 
@@ -45,41 +37,24 @@ public class IconicFilmAdapter extends UltimateViewAdapter<IconicFilmViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(final IconicFilmViewHolder holder, final int position) {
-        loadFilm(holder, films.get(position));
-        convertFilmToUseCase.execute(new Subscriber() {
-            @Override
-            public void onCompleted() {}
-
-            @Override
-            public void onError(Throwable e) {}
-
-            @Override
-            public void onNext(Object o) {
-                holder.setFilmJson((String)o);
-            }
-        });
-    }
-
-    public void loadFilm(IconicFilmViewHolder view, Film film) {
-        view.showIcon(film.getImage().getOriginal());
-        view.showTitle(film.getName());
+    public void onBindViewHolder(final FilmListViewHolder holder, final int position) {
+        holder.bindFilm(films.get(position));
     }
 
     @Override
-    public IconicFilmViewHolder newFooterHolder(View view) {
+    public FilmListViewHolder newFooterHolder(View view) {
         return null;
     }
 
     @Override
-    public IconicFilmViewHolder newHeaderHolder(View view) {
+    public FilmListViewHolder newHeaderHolder(View view) {
         return null;
     }
 
     @Override
-    public IconicFilmViewHolder onCreateViewHolder(ViewGroup parent) {
+    public FilmListViewHolder onCreateViewHolder(ViewGroup parent) {
         View view = getInflater().inflate(R.layout.list_item_big, parent, false);
-        IconicFilmViewHolder holder = new IconicFilmViewHolder(view, activity);
+        FilmListViewHolder holder = new FilmListViewHolder(view, activity);
         return holder;
     }
 
